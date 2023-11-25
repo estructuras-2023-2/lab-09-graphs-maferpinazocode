@@ -93,3 +93,13 @@ string reconstruye(const vector<string>& roads) {
 
     return result.empty() ? "" : result.substr(0, result.length() - 1);
 }
+int main() {
+    vector<string> carreteras = {"T1 Tumbes Quito", "C1 Iquitos StMartin 1000"};
+
+    string resultado = reconstruye(carreteras);
+
+    cout << resultado << endl;
+
+    return 0;
+}
+
