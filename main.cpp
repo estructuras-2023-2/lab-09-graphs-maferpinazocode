@@ -55,3 +55,41 @@ vector<string> split(const string& str, char delim) {
     keys.push_back(str.substr(start));
     return keys;
 }
+
+
+string reconstruye(const vector<string>& roads) {
+    map<string, string> parent;
+    vector<Road> allRoads;
+    vector<string> allCities;
+    set<string> roadsToReconstruct;
+
+    for (const auto& roadStr : roads) {
+        auto keys = split(roadStr, ' ');
+        allCities.push_back(keys[1]);
+        allCities.push_back(keys[2]);
+
+        if (keys.size() == 4) {
+            allRoads.emplace_back(keys[0], keys[1], keys[2], stoi(keys[3]));
+        } else {
+            unite(parent, keys[1], keys[2]);
+        }
+    }
+
+    for (const auto& road : allRoads) {
+        if (!areCitiesConnected(parent, road.city1, road.city2)) {
+            unite(parent, road.city1, road.city2);
+            roadsToReconstruct.insert(road.id);
+        }
+    }
+
+    if (!isTotalConnection(parent, allCities)) {
+        return "IMPOSIBLE";
+    }
+
+    string result;
+    for (const auto& id : roadsToReconstruct) {
+        result += id + " ";
+    }
+
+    return result.empty() ? "" : result.substr(0, result.length() - 1);
+}
