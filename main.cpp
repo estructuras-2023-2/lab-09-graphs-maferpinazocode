@@ -25,6 +25,15 @@ bool areCitiesConnected(map<string, string>& parent, const string& a, const stri
     return find(parent, a) == find(parent, b);
 }
 
+bool isTotalConnection(map<string, string>& parent, const vector<string>& cities) {
+    if (cities.empty()) return true;
+    string node = find(parent, cities.front());
+    for (const auto& city : cities) {
+        if (find(parent, city) != node) return false;
+    }
+    return true;
+}
+
 struct Road {
     string id;
     string city1;
