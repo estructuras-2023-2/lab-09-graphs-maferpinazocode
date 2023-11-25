@@ -2,6 +2,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <set>
 
 using namespace std;
 
@@ -12,6 +13,15 @@ string find(map<string, string>& parent, const string& s) {
         parent[s] = find(parent, parent[s]);
     return parent[s];
 }
+
+struct Carretera {
+    string id;
+    string ciudad1;
+    string ciudad2;
+    int costo;
+
+    Carretera(const string& i, const string& c1, const string& c2, int co = -1) : id(i), ciudad1(c1), ciudad2(c2), costo(co) {}
+};
 
 struct Road {
     string id;
