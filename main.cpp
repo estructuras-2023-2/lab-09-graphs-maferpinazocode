@@ -14,14 +14,16 @@ string find(map<string, string>& parent, const string& s) {
     return parent[s];
 }
 
-struct Carretera {
-    string id;
-    string ciudad1;
-    string ciudad2;
-    int costo;
+void unite(map<string, string>& parent, const string& a, const string& b) {
+    string nodeA = find(parent, a);
+    string nodeB = find(parent, b);
+    if (nodeA != nodeB)
+        parent[nodeA] = nodeB;
+}
 
-    Carretera(const string& i, const string& c1, const string& c2, int co = -1) : id(i), ciudad1(c1), ciudad2(c2), costo(co) {}
-};
+bool areCitiesConnected(map<string, string>& parent, const string& a, const string& b) {
+    return find(parent, a) == find(parent, b);
+}
 
 struct Road {
     string id;
