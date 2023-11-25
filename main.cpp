@@ -1,8 +1,17 @@
 #include <iostream>
 #include <string>
+#include <map>
 #include <vector>
 
 using namespace std;
+
+string find(map<string, string>& parent, const string& s) {
+    if (parent.find(s) == parent.end())
+        parent[s] = s;
+    else if (parent[s] != s)
+        parent[s] = find(parent, parent[s]);
+    return parent[s];
+}
 
 struct Road {
     string id;
